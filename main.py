@@ -16,7 +16,7 @@ def index():
     # Create headers with the custom user agent and additional header
     headers = {
         'User-Agent': user_agent,
-        'X-Powered-By': 'NIHAL ✨'
+        'X-Powered-By': 'NIHAL \u2728'  # Encoding the sparkle emoji as a Unicode character
     }
 
     # Fetch the content of the URL using the provided user agent
