@@ -55,7 +55,7 @@ def echo_all(message):
         bot.send_message(message.chat.id, "Invalid option. Please choose 'Proxy✨'.")
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
-async def process_country_code(message):
+def process_country_code(message):
     country_code = message.text.upper()
     
     # Replace 'cz' in the username with the country code
@@ -74,16 +74,14 @@ async def process_country_code(message):
         download_speed, upload_speed = measure_speed(proxy)
         if download_speed is not None and upload_speed is not None:
             proxy_info = f"Proxy Details:\nIP: {proxy['ip']}\nPort: {proxy['port']}\nUsername: {proxy['username']}\nPassword: {proxy['password']}\n\nIPv4 Address: {proxy['ip']}\nDownload Speed: {download_speed:.2f} Mbps\nUpload Speed: {upload_speed:.2f} Mbps"
-            await bot.send_message(message.chat.id, proxy_info, parse_mode='Markdown')
+            bot.send_message(message.chat.id, proxy_info, parse_mode='Markdown')
         else:
-            await bot.send_message(message.chat.id, "Proxy is working, but speed test failed.")
+            bot.send_message(message.chat.id, "Proxy is working, but speed test failed.")
     else:
-        await bot.send_message(message.chat.id, "Proxy is not working.")
+        bot.send_message(message.chat.id, "Proxy is not working.")
 
-async def main():
-    await bot.polling()
+def main():
+    bot.polling(none_stop=True)
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.create_task(main())
-    loop.run_forever()
+    main()
